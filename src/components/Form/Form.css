@@ -1,0 +1,277 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.modal-open {
+  opacity: 1;
+}
+
+.modal-overlay.modal-closing {
+  opacity: 0;
+}
+
+.event-registration {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  width: 90%;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: rgba(255, 255, 255, 1);
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-open .event-registration {
+  transform: scale(1);
+}
+
+.modal-closing .event-registration {
+  transform: scale(0.9);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.close-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.event-title-modal {
+  color: rgba(43, 45, 51, 1);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgb(238, 238, 238);
+  padding-bottom: 10px;
+}
+
+.event-subtitle {
+  color: rgba(128, 129, 133, 1);
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.event-info {
+  background-color: rgba(244, 244, 244, 1);
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+}
+
+.event-name {
+  font-weight: 700;
+  font-size: 16px;
+  color: rgba(43, 45, 51, 1);
+  margin-bottom: 5px;
+}
+
+.event-age {
+  color: rgba(170, 171, 173, 1);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.event-format {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.format-option {
+  padding: 10px 15px;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 20px;
+  background-color: rgba(244, 244, 244, 1);
+  color: rgba(43, 45, 51, 1);
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.format-option:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.format-option.active {
+  background-color: rgba(43, 45, 51, 1);
+  color: rgba(255, 255, 255, 1);
+  border-color: rgb(153, 153, 153);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.attendee-field,
+.comment-field {
+  margin: 20px 0;
+}
+
+.field-label {
+  font-weight: 400;
+  font-size: 12px;
+  color: rgba(128, 129, 133, 1);
+  margin-bottom: 5px;
+}
+
+.text-input,
+.text-area {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.text-area {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.register-btn {
+  background-color: rgba(254, 230, 0, 1);
+  color: rgba(43, 45, 51, 1);
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cancel-btn {
+  background-color: white;
+  color: rgba(43, 45, 51, 1);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Адаптация для экранов до 800px */
+@media (max-width: 800px) {
+  .event-registration {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .event-title-modal {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .event-subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .event-info {
+    padding: 12px;
+    margin-bottom: 20px;
+  }
+
+  .event-name {
+    font-size: 14px;
+  }
+
+  .event-age {
+    font-size: 11px;
+  }
+
+  .format-option {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .attendee-field,
+  .comment-field {
+    margin: 15px 0;
+  }
+
+  .text-input,
+  .text-area {
+    padding: 7px;
+  }
+
+  .action-buttons {
+    gap: 10px;
+  }
+
+  .register-btn,
+  .cancel-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
+/* Адаптация для экранов до 480px */
+@media (max-width: 480px) {
+  .event-registration {
+    max-width: 95%;
+    padding: 12px;
+  }
+
+  .event-title-modal {
+    font-size: 18px;
+    padding-bottom: 8px;
+  }
+
+  .event-format {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .format-option {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .text-area {
+    min-height: 60px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .register-btn,
+  .cancel-btn {
+    width: 100%;
+    padding: 10px;
+  }
+}
