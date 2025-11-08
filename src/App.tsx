@@ -18,5 +18,7 @@ export default App;
 //header - content - footer
 // contet: WelcomComponent  -  Activities - Form
 // разнести компоненты и установить Redux во второй папке TstTest, react tool kid
+//каждый event это отдельный компонент
+// 
 
 

@@ -9,9 +9,10 @@ class Api {
       }
       
       const data = await res.json();
+
       return data;
     } catch (error) {
-      console.error(error);
+      console.log(error);
       throw error;
     }
   }

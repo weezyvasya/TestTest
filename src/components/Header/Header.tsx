@@ -1,5 +1,8 @@
 import type { FC } from "react";
+import logo from '../../img/Logotype.png';
+import photoHeader from '../../img/S.png';
 import './Header.css';
+import exit from '../../img/Exit.svg';
 
 interface HeaderProps {}
 
@@ -7,12 +10,12 @@ export const Header: FC<HeaderProps> = () => {
   return (
     <header className="main-header">
       <div className="header-left">
-        <img src="./img/Logotype.png" alt="logo" />
+        <img src={logo} alt="logo" />
       </div>
       <div className="header-right">
         <p className="header-text">Валентин Костин</p>
-        <img src="../img/S.png" alt="Валентин Костин" />
-        <img src="./img/Exit.svg" alt="выход" />
+        <img src={photoHeader} alt="Валентин Костин" />
+        <img src={exit} alt="выход" />
       </div>
     </header>
   );

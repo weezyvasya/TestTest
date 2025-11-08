@@ -3,21 +3,26 @@ import { useState, useEffect } from "react";
 import Api from "../../api";
 import type { Event } from "../../types"; 
 import './Activities.css';
+import heart from '../../img/heart.svg';
 
 interface ActivitiesProps {
   onRegisterClick: () => void;
 }
 
 export const Activities: FC<ActivitiesProps> = ({ onRegisterClick }) => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Event[]>([]); 
+  // useSelector((store)=> store.events) --> initinatState
+
+  // useDispath() --> dispath(getEvents('api/data'))
   const [activeCategory, setActiveCategory] = useState<string>('IT Academy');
 
   useEffect(() => {
     const fetchEvents = async () => {
       const api = new Api();
       try {
-        const data = await api.get<{ data: Event[] }>('http://localhost:3000/data');
-        setEvents(data.data);
+        const data = await api.get<Event[]> ('api/data');
+
+        setEvents(data);
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -63,7 +68,7 @@ export const Activities: FC<ActivitiesProps> = ({ onRegisterClick }) => {
                     <td className="number-column">
                       <div className="number-with-heart">
                         <img
-                          src="./img/heart.svg"
+                          src={heart}
                           alt="Избранное"
                           className="heart-icon"
                         />
@@ -94,3 +99,6 @@ export const Activities: FC<ActivitiesProps> = ({ onRegisterClick }) => {
     </section>
   );
 };
+// 13 строка удалить + переделать use effect с функций get из слайса
+
+
