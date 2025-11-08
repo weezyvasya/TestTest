@@ -1,37 +1,45 @@
 import type { FC } from "react";
-import { useState, useEffect } from "react";
-import Api from "../../api";
-import type { Event } from "../../types"; 
+import { useEffect, useState } from "react"; // Добавлен useState
+import { useSelector, useDispatch } from "react-redux";
+import type { AppDispatch, RootState } from "../../store/store";
+import { getEvents } from "../../store/slices/eventsSlice";
+import { EventItem } from "../EventItem/EventItem";
 import './Activities.css';
-import heart from '../../img/heart.svg';
 
 interface ActivitiesProps {
   onRegisterClick: () => void;
 }
 
 export const Activities: FC<ActivitiesProps> = ({ onRegisterClick }) => {
-  const [events, setEvents] = useState<Event[]>([]); 
-  // useSelector((store)=> store.events) --> initinatState
-
-  // useDispath() --> dispath(getEvents('api/data'))
-  const [activeCategory, setActiveCategory] = useState<string>('IT Academy');
+  const dispatch = useDispatch<AppDispatch>();
+  const { events, loading, error } = useSelector((state: RootState) => state.events);
+  const [activeCategory, setActiveCategory] = useState<string>('IT Academy'); // Теперь работает
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      const api = new Api();
-      try {
-        const data = await api.get<Event[]> ('api/data');
-
-        setEvents(data);
-      } catch (error) {
-        console.error('Error fetching events:', error);
-      }
-    };
-
-    fetchEvents();
-  }, []);
+    dispatch(getEvents('api/data'));
+  }, [dispatch]);
 
   const categories = ['IT Academy', 'Маркетинг', 'Retail', 'Остальные'];
+
+  if (loading) {
+    return (
+      <section className="all-events">
+        <div className="container">
+          <div className="loading">Загрузка мероприятий...</div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="all-events">
+        <div className="container">
+          <div className="error">Ошибка: {error}</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="all-events">
@@ -55,41 +63,11 @@ export const Activities: FC<ActivitiesProps> = ({ onRegisterClick }) => {
             <table className="events-table">
               <tbody className="table-root">
                 {events.map((event, index) => (
-                  <tr key={index}>
-                    <td className="date-column">{event.date}</td>
-                    <td className="event-column">
-                      <div className="event-title">
-                        {event.description}
-                      </div>
-                      <div className="event-description">
-                        {event.title}
-                      </div>
-                    </td>
-                    <td className="number-column">
-                      <div className="number-with-heart">
-                        <img
-                          src={heart}
-                          alt="Избранное"
-                          className="heart-icon"
-                        />
-                        <span className="participant-number">{event.countLikes}</span>
-                      </div>
-                    </td>
-                    <td className="participants-column">
-                      {event.names.map((name, nameIndex) => (
-                        <div key={nameIndex} className="participant-name">{name}</div>
-                      ))}
-                    </td>
-                    <td className="registration-column">
-                      <button
-                        disabled={event.registrationDisabled}
-                        className="registration-button"
-                        onClick={onRegisterClick}
-                      >
-                        Зарегистрироваться
-                      </button>
-                    </td>
-                  </tr>
+                  <EventItem 
+                    key={index} 
+                    event={event} 
+                    onRegisterClick={onRegisterClick} 
+                  />
                 ))}
               </tbody>
             </table>
