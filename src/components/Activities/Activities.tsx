@@ -5,21 +5,26 @@ import type { AppDispatch, RootState } from "../../store/store";
 import { getEvents } from "../../store/slices/eventsSlice";
 import { EventItem } from "../EventItem/EventItem";
 import './Activities.css';
+import { AddNewTask } from "../../store/slices/eventsSlice";
 
 interface ActivitiesProps {
   onRegisterClick: () => void;
 }
 
 export const Activities: FC<ActivitiesProps> = ({ onRegisterClick }) => {
+
   const dispatch = useDispatch<AppDispatch>();
-  const { events, loading, error } = useSelector((state: RootState) => state.events);
+
+  const { events, loading, error, param } = useSelector((state: RootState) => state.events);
+
   const [activeCategory, setActiveCategory] = useState<string>('IT Academy'); // Теперь работает
+
+  const categories = ['IT Academy', 'Маркетинг', 'Retail', 'Остальные'];
 
   useEffect(() => {
     dispatch(getEvents('api/data'));
   }, [dispatch]);
 
-  const categories = ['IT Academy', 'Маркетинг', 'Retail', 'Остальные'];
 
   if (loading) {
     return (
@@ -46,7 +51,7 @@ export const Activities: FC<ActivitiesProps> = ({ onRegisterClick }) => {
       <div className="container">
         <div className="all-events-main">
           <div className="all-events-main-title">
-            <h2>Все мероприятия</h2>
+            <h2 onClick={()=> dispatch(AddNewTask(10))}>Все мероприятия {param}</h2>
           </div>
           <nav className="all-events-choice">
             {categories.map((category) => (
@@ -62,9 +67,9 @@ export const Activities: FC<ActivitiesProps> = ({ onRegisterClick }) => {
           <div className="all-events-it">
             <table className="events-table">
               <tbody className="table-root">
-                {events.map((event, index) => (
+                {events.map((event) => (
                   <EventItem 
-                    key={index} 
+                    key={event.id} 
                     event={event} 
                     onRegisterClick={onRegisterClick} 
                   />

@@ -1,24 +1,24 @@
-import type { FC } from "react";
+import React from "react";
 import { Header } from "./components/Header/Header";
 import { Content } from "./components/Contetnt/Contetnt";
 import { Footer } from "./components/Footer/Footer";
-import './App.css';
+import "./App.css";
 
-const App: FC = () => {
-  return (
-    <div className="app">
-      <Header />
-      <Content />
-      <Footer />
-    </div>
-  );
-};
+class App extends React.Component {
+  render() {
+    return (
+      <div className="app">
+        <Header />
+        <Content />
+        <Footer />
+      </div>
+    );
+  }
+}
 
 export default App;
 //header - content - footer
 // contet: WelcomComponent  -  Activities - Form
 // разнести компоненты и установить Redux во второй папке TstTest, react tool kid
 //каждый event это отдельный компонент
-// 
-
-
+//

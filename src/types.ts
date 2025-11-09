@@ -1,5 +1,6 @@
 // types.ts
 export interface Event {
+  id: number;
   date: string;
   description: string;
   title: string;

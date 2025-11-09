@@ -4,19 +4,26 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { Event } from '../../types';
 import Api from '../../api';
 
-interface EventsState {
+export interface EventsState {
   events: Event[];
   loading: boolean;
   error: string;
+  param: number;
 }
 
 const initialState: EventsState = {
   events: [],
   loading: false,
   error: '',
+  param: 0,
 };
 
 const api = new Api()
+
+
+
+
+
 
 const getEvents = createAsyncThunk(
   '@events/getEvents',
@@ -34,15 +41,10 @@ const eventsSlice = createSlice({
   name: 'events',
   initialState,
   reducers: {
-    // setEvents: (state, action: PayloadAction<Event[]>) => {
-    //   state.events = action.payload;
-    // },
-    // setLoading: (state, action: PayloadAction<boolean>) => {
-    //   state.loading = action.payload;
-    // },
-    // setError: (state, action: PayloadAction<string | null>) => {
-    //   state.error = action.payload;
-    // },
+  AddNewTask: (s, { payload }) => {
+   alert(`Добавлено успешно`)
+   s.param += payload
+  } 
   },
   extraReducers: (builder) => {
     builder
@@ -57,12 +59,16 @@ const eventsSlice = createSlice({
     .addCase(getEvents.pending, (state)=>{
       state.loading = true
     })
-
   }
+  
   
 });
 
-// export const { setEvents, setLoading, setError } = eventsSlice.actions;
+
+
+export const { AddNewTask } = eventsSlice.actions;
+
 export default eventsSlice.reducer;
 
-export {getEvents}
+
+export { getEvents }

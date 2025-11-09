@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import type { Event } from "../../types";
 import heart from '../../img/heart.svg';
-import './EventItem.css';
 
 interface EventItemProps {
   event: Event;
