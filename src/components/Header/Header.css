@@ -33,6 +33,49 @@
   font-size: 14px;
 }
 
+/* Переменные для светлой темы */
+:root {
+  --header-bg-color: #ffffff;
+  --header-text-color: #333333;
+  --button-bg-color: #f0f0f0;
+  --button-text-color: #333333;
+  --border-color: #e0e0e0;
+}
+
+/* Переменные для темной темы */
+[data-theme="dark"] {
+  --header-bg-color: #1a1a1a;
+  --header-text-color: #ffffff;
+  --button-bg-color: #333333;
+  --button-text-color: #ffffff;
+  --border-color: #444444;
+}
+
+.main-header {
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.header-text {
+  color: var(--header-text-color);
+}
+
+.theme-button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+  opacity: 0.8;
+}
+
 @media (max-width: 800px) {
   .main-header {
     padding: 0 15px;

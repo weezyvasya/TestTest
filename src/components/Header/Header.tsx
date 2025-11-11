@@ -3,20 +3,28 @@ import logo from '../../img/Logotype.png';
 import photoHeader from '../../img/S.png';
 import './Header.css';
 import exit from '../../img/Exit.svg';
-import { useDispatch, useSelector, type UseSelector } from "react-redux";
-import type { UseDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { toggleTheme } from "../../store/slices/themeSlice";
-
+import { useEffect } from "react"; // Добавьте этот импорт
 
 interface HeaderProps {}
 
 export const Header: FC<HeaderProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
   const isDark = useSelector((state: RootState) => state.theme.isDark);
-   const handleThemeToggle = () => {
+  
+  const handleThemeToggle = () => {
     dispatch(toggleTheme());
   };
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+  }, [isDark]);
 
   return (
     <header className="main-header">
@@ -25,7 +33,7 @@ export const Header: FC<HeaderProps> = () => {
       </div>
       <div className="header-right">
         <p className="header-text">Валентин Костин</p>
-         <button 
+        <button 
           className="theme-button"
           onClick={handleThemeToggle}
         >

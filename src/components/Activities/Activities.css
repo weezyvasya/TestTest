@@ -128,6 +128,7 @@
   font-size: 13px;
   font-weight: 500;
   transition: background 0.2s;
+  background-color: white;
 }
 
 .registration-button:disabled {
