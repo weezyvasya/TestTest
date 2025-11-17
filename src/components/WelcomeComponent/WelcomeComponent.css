@@ -50,7 +50,7 @@
   gap: 8px;
 }
 
-.signup-button {
+/* .signup-button {
   padding: 10px 20px;
   background-color: rgba(43, 45, 51, 1);
   color: rgba(255, 255, 255, 1);
@@ -68,8 +68,8 @@
 
 .signup-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); }*/
+
 
 @media (max-width: 800px) {
   .frontend-school {

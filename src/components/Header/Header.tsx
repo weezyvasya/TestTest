@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { toggleTheme } from "../../store/slices/themeSlice";
 import { useEffect } from "react"; // Добавьте этот импорт
+import ButtonUI from "../../UI/ButtonUI";
 
 interface HeaderProps {}
 
@@ -33,12 +34,9 @@ export const Header: FC<HeaderProps> = () => {
       </div>
       <div className="header-right">
         <p className="header-text">Валентин Костин</p>
-        <button 
-          className="theme-button"
-          onClick={handleThemeToggle}
-        >
+        <ButtonUI handle={handleThemeToggle}>
           {isDark ? 'Светлая тема' : 'Темная тема'}
-        </button>
+        </ButtonUI>
         <img src={photoHeader} alt="Валентин Костин" />
         <img src={exit} alt="выход" />
       </div>

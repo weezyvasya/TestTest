@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import './WelcomeComponent.css';
+import ButtonUI from "../../UI/ButtonUI";
 
 interface WelcomeComponentProps {}
 
@@ -12,7 +13,7 @@ export const WelcomeComponent: FC<WelcomeComponentProps> = () => {
         <div className="date-location">
           25.05.2020<span>Офис в Нагатино</span>
         </div>
-        <button className="signup-button">Записаться на курс</button>
+        <ButtonUI>Записаться на курс</ButtonUI>
       </div>
     </section>
   );
