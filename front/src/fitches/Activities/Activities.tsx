@@ -1,33 +1,26 @@
 import type { FC } from "react";
-import { useEffect, useState } from "react"; // Добавлен useState
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { getEvents } from "../../store/slices/eventsSlice";
 import { EventItem } from "../../components/EventItem/EventItem";
 import './Activities.css';
 
-type ActivitiesProps = {
-  onRegisterClick: () => void;
-}
+const CATEGORIES = ['IT Academy', 'Маркетинг', 'Retail', 'Остальные'];
+const DEFAULT_CATEGORY = 'IT Academy';
 
-export const Activities: FC<ActivitiesProps> = ({onRegisterClick}) => {
-
+export const Activities: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-
   const { events, loading, error } = useSelector((state: RootState) => state.events);
-
-  const [activeCategory, setActiveCategory] = useState<string>('IT Academy'); // Теперь работает
-
-  const categories = ['IT Academy', 'Маркетинг', 'Retail', 'Остальные'];
+  const [activeCategory, setActiveCategory] = useState<string>(DEFAULT_CATEGORY);
 
   useEffect(() => {
     dispatch(getEvents('api/data'));
-  }, []);
-  //use effect гарантирует что, функция cb будет вызвана 1 раз
+  }, [dispatch]);
 
-
-  
-
+  const handleCategoryClick = (category: string) => {
+    setActiveCategory(category);
+  };
 
   if (loading) {
     return (
@@ -57,11 +50,11 @@ export const Activities: FC<ActivitiesProps> = ({onRegisterClick}) => {
             <h2>Все мероприятия</h2>
           </div>
           <nav className="all-events-choice">
-            {categories.map((category) => (
+            {CATEGORIES.map((category) => (
               <button
                 key={category}
                 className={activeCategory === category ? 'all-events-choice_selected' : ''}
-                onClick={() => setActiveCategory(category)}
+                onClick={() => handleCategoryClick(category)}
               >
                 {category}
               </button>
@@ -71,11 +64,7 @@ export const Activities: FC<ActivitiesProps> = ({onRegisterClick}) => {
             <table className="events-table">
               <tbody className="table-root">
                 {events.map((event) => (
-                  <EventItem 
-                    key={event.id} 
-                    event={event} 
-                    onRegisterClick={onRegisterClick} 
-                  />
+                  <EventItem key={event.id} event={event} />
                 ))}
               </tbody>
             </table>
@@ -85,6 +74,5 @@ export const Activities: FC<ActivitiesProps> = ({onRegisterClick}) => {
     </section>
   );
 };
-// 13 строка удалить + переделать use effect с функций get из слайса
 
 

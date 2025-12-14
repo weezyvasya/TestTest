@@ -1,16 +1,21 @@
 import type { FC } from "react";
 import type { Event } from "../../types";
 import heart from '../../img/heart.svg';
+import { useModal } from "../../context/ModalContext";
 
 type EventItemProps = {
   event: Event;
-  onRegisterClick: () => void;
 }
 
+const HEART_ALT_TEXT = "Избранное";
 
-export const EventItem: FC<EventItemProps> = ({ event, onRegisterClick }) => {
+export const EventItem: FC<EventItemProps> = ({ event }) => {
+  const { openModal } = useModal(); 
 
- 
+  const handleRegisterClick = () => {
+    console.log('Registering for event:', event.id);
+    openModal(); 
+  };
 
   return (
     <tr>
@@ -27,7 +32,7 @@ export const EventItem: FC<EventItemProps> = ({ event, onRegisterClick }) => {
         <div className="number-with-heart">
           <img
             src={heart}
-            alt="Избранное"
+            alt={HEART_ALT_TEXT}
             className="heart-icon"
           />
           <span className="participant-number">{event.countLikes}</span>
@@ -42,7 +47,7 @@ export const EventItem: FC<EventItemProps> = ({ event, onRegisterClick }) => {
         <button
           disabled={event.registrationDisabled}
           className="registration-button"
-          onClick={onRegisterClick}
+          onClick={handleRegisterClick} 
         >
           Зарегистрироваться
         </button>

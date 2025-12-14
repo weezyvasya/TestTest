@@ -1,28 +1,17 @@
 import type { FC } from "react";
-import { useState } from "react";
 import { WelcomeComponent } from "../WelcomeComponent/WelcomeComponent";
 import { Activities } from "../../fitches/Activities/Activities";
 import { Form } from "../Form/Form"; 
-
-
+import { useModal } from "../../context/ModalContext"; 
 
 export const Content: FC = () => {
-  const [isFormOpen, setIsFormOpen] = useState(false);
-
-  const handleRegisterClick = () => {   // ?
-    setIsFormOpen(true);
-    console.log('Test fn')
-  };
-
-  const handleCloseForm = () => {
-    setIsFormOpen(false);
-  };
+  const { isOpen, closeModal } = useModal();
 
   return (
     <main>
       <WelcomeComponent /> 
-      <Activities onRegisterClick={handleRegisterClick} />
-      <Form isOpen={isFormOpen} onClose={handleCloseForm} />
+      <Activities />
+      <Form isOpen={isOpen} onClose={closeModal} />
     </main>
   );
 };
