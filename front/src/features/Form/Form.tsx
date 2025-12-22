@@ -1,6 +1,8 @@
 import type { FC } from "react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react"; // убрали useCallback
 import './Form.css';
+
+type EventFormat = 'online' | 'offline';
 
 type FormProps = {
   isOpen: boolean;
@@ -11,7 +13,8 @@ const EVENT_TITLE = "Запись на мероприятие";
 const EVENT_SUBTITLE = "Выберите необходимые параметры мероприятия";
 const EVENT_NAME = "Веницианский карнавал танцев и богохульных плясок: смотрим вместе";
 const EVENT_AGE = "К посещению приглашаются сотрудники 18+";
-const FORMAT_OPTIONS = [
+
+const FORMAT_OPTIONS: { value: EventFormat; label: string }[] = [
   { value: 'online', label: 'Онлайн' },
   { value: 'offline', label: 'Оффлайн: офис Нагатино' }
 ];
@@ -24,7 +27,8 @@ const CANCEL_BUTTON_TEXT = "Отменить";
 
 export const Form: FC<FormProps> = ({ isOpen, onClose }) => {
   const [isActive, setIsActive] = useState(false);
-  const [format, setFormat] = useState<'online' | 'offline'>('online');
+
+  const [format, setFormat] = useState<EventFormat>('online');
 
   useEffect(() => {
     if (isOpen) {
@@ -35,21 +39,21 @@ export const Form: FC<FormProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  const handleOverlayClick = useCallback((e: React.MouseEvent) => {
+  const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
-  }, [onClose]);
+  };
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       onClose();
     }
-  }, [onClose]);
+  };
 
-  const handleFormatChange = useCallback((newFormat: 'online' | 'offline') => {
+  const handleFormatChange = (newFormat: EventFormat) => {
     setFormat(newFormat);
-  }, []);
+  };
 
   if (!isActive) return null;
 
@@ -83,7 +87,7 @@ export const Form: FC<FormProps> = ({ isOpen, onClose }) => {
             <button 
               key={option.value}
               className={`format-option ${format === option.value ? 'active' : ''}`}
-              onClick={() => handleFormatChange(option.value as 'online' | 'offline')}
+              onClick={() => handleFormatChange(option.value)}
             >
               {option.label}
             </button>

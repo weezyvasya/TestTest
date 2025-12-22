@@ -3,7 +3,7 @@ import logo from '../../img/Logotype.png';
 import photoHeader from '../../img/S.png';
 import './Header.css';
 import exit from '../../img/Exit.svg';
-import ThemeToggle from "../../fitches/ThemeToggle/ThemeToggle";
+import ThemeToggleButton from "../../features/ThemeToggleButton/ThemeToggleButton";
 
 
 
@@ -19,7 +19,7 @@ export const Header: FC = () => {
       </div>
       <div className="header-right">
         <p className="header-text">Валентин Костин</p>
-        <ThemeToggle/>
+        <ThemeToggleButton/>
         <img src={photoHeader} alt="Валентин Костин" />
         <img src={exit} alt="выход" />
       </div>

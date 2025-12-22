@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { WelcomeComponent } from "../WelcomeComponent/WelcomeComponent";
-import { Activities } from "../../fitches/Activities/Activities";
-import { Form } from "../Form/Form"; 
+import { Activities } from "../../features/Activities/Activities";
+import { Form } from "../../features/Form/Form"; 
 import { useModal } from "../../context/ModalContext"; 
 
 export const Content: FC = () => {

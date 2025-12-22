@@ -8,7 +8,7 @@ import ButtonUI from "../../UI/ButtonUI";
 
 
 
-const ThemeToggle:FC = () => {
+const ThemeToggleButton:FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const isDark = useSelector((state: RootState) => state.theme.isDark);
   
@@ -31,4 +31,4 @@ const ThemeToggle:FC = () => {
     )
 }
 
-export default ThemeToggle;
+export default ThemeToggleButton;

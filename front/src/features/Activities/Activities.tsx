@@ -16,7 +16,7 @@ export const Activities: FC = () => {
 
   useEffect(() => {
     dispatch(getEvents('api/data'));
-  }, [dispatch]);
+  },);
 
   const handleCategoryClick = (category: string) => {
     setActiveCategory(category);
